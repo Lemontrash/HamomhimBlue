@@ -33,3 +33,8 @@ Route::group([
 });
 
 
+
+Route::post('searchCategoriesByName', 'CategoryController@searchByName');
+Route::post('getAllCategories', 'CategoryController@getAllCategories');
+
+
