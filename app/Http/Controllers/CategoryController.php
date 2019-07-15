@@ -31,5 +31,6 @@ class CategoryController extends Controller
             $data[$key]['name'] = $category->name;
             $data[$key]['image'] = $category->image;
         }
+        return response()->json($data);
     }
 }
