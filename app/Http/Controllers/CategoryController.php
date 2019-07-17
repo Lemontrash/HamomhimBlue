@@ -14,23 +14,14 @@ class CategoryController extends Controller
         if ($categories->isEmpty()){
             return response()->json(['success' => false, 'message' => 'nothing found'], 202);
         }else{
-            foreach ($categories as $key => $category) {
-                $data[$key]['id'] = $category->id;
-                $data[$key]['value'] = $category->name;
-                $data[$key]['image'] = $category->image;
-            }
+            $data = SupportControllerCosImLazy::parseCategories($categories);
             return response()->json($data, 200);
         }
     }
 
     public function getAllCategories(){
         $categories = Category::all();
-
-        foreach ($categories as $key => $category) {
-            $data[$key]['id'] = $category->id;
-            $data[$key]['name'] = $category->name;
-            $data[$key]['image'] = $category->image;
-        }
+        $data = SupportControllerCosImLazy::parseCategories($categories);
         return response()->json($data);
     }
 }

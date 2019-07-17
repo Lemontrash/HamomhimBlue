@@ -26,8 +26,10 @@ class CreateUsersTable extends Migration
             $table->string('fax');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->mediumText('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

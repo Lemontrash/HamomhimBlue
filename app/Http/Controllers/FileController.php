@@ -10,17 +10,35 @@ class FileController extends Controller
     public static function uploadPicture($type, $file){
         switch ($type){
             case 'post':
-                $image = $file;
-                if($image) {
-                    $name = 'FILE'.rand(0,999999).time().'.'.$image->getClientOriginalExtension();
+                //images
+                if($file) {
+                    $name = 'FILE'.rand(0,999999).time().'.'.$file->getClientOriginalExtension();
                     $destinationPath = public_path('/images/postImages');
-                    $image->move($destinationPath, $name);
+                    $file->move($destinationPath, $name);
                 }
-                return json_encode(['success' => true, 'image' => '/images/postImages'.$name]);
+                return json_encode(['success' => true, 'image' => '/images/postImages/'.$name]);
                 break;
-            case '':
+            case 'requestAttachment':
+                //@TODO сделать загрузку файла
+                // all files
+                if($file) {
+                    if ($file->getClientOriginalExtension() == 'php' || $file->getClientOriginalExtension() == 'exe'){
+                        return json_encode(['success' => false, 'message' => 'Restricted file type']);
+                    }
+                    $name = 'FILE'.rand(0,999999).time().'.'.$file->getClientOriginalExtension();
+                    $destinationPath = public_path('/files/requestFiles');
+                    $file->move($destinationPath, $name);
+                }
+                return json_encode(['success' => true, 'file' => '/files/requestFiles/'.$name]);
                 break;
-
+            case 'avatar':
+                if($file) {
+                    $name = 'FILE'.rand(0,999999).time().'.'.$file->getClientOriginalExtension();
+                    $destinationPath = public_path('/files/avatars');
+                    $file->move($destinationPath, $name);
+                }
+                return json_encode(['success' => true, 'avatar' => '/files/avatars'.$name]);
+                break;
         }
         return json_encode(['success' => false, 'message' => 'No such type']);
     }

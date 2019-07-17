@@ -37,4 +37,14 @@ Route::group([
 Route::post('searchCategoriesByName', 'CategoryController@searchByName');
 Route::post('getAllCategories', 'CategoryController@getAllCategories');
 
+Route::post('addNewProject', 'ProjectController@addNewProject');
+Route::post('getAllProjectsByUser', 'ProjectController@getAllProjectsByUser');
+Route::post('addOrderToProject', 'ProjectController@addOrderToProject');
+Route::post('openProject', 'ProjectController@openProject');
+Route::post('closeProject', 'ProjectController@closeProject');
 
+Route::post('getAllWorkersPaginated', 'UserController@getAllWorkersPaginated');
+Route::post('changePersonalInfo', 'UserController@changePersonalInfo');
+Route::post('changePassword', 'UserController@changePassword');
+
+Route::post('architectSendRequest', 'ArchitectRequestController@architectSendRequest');
