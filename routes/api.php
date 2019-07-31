@@ -32,7 +32,7 @@ Route::group([
     });
 });
 
-
+Route::post('sendContactForm', 'MailController@sendContactForm');
 
 Route::post('searchCategoriesByName', 'CategoryController@searchByName');
 Route::post('getAllCategories', 'CategoryController@getAllCategories');
@@ -42,9 +42,15 @@ Route::post('getAllProjectsByUser', 'ProjectController@getAllProjectsByUser');
 Route::post('addOrderToProject', 'ProjectController@addOrderToProject');
 Route::post('openProject', 'ProjectController@openProject');
 Route::post('closeProject', 'ProjectController@closeProject');
+Route::post('getAllUsersOnProject', 'ProjectController@getAllUsersOnProject');
+Route::post('getProjectOrderForSpecificUser', 'ProjectController@getProjectOrderForSpecificUser');
 
 Route::post('getAllWorkersPaginated', 'UserController@getAllWorkersPaginated');
 Route::post('changePersonalInfo', 'UserController@changePersonalInfo');
 Route::post('changePassword', 'UserController@changePassword');
+Route::post('getAllUserFiles', 'UserController@getAllUserFiles');
+Route::post('getAllWorkerProjects', 'UserController@getAllWorkerProjects');
+Route::post('addRatingOnUser', 'UserController@addRatingOnUser');
 
 Route::post('architectSendRequest', 'ArchitectRequestController@architectSendRequest');
+Route::post('answerRequest', 'ArchitectRequestController@answerRequest');

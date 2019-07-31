@@ -19,7 +19,6 @@ class FileController extends Controller
                 return json_encode(['success' => true, 'image' => '/images/postImages/'.$name]);
                 break;
             case 'requestAttachment':
-                //@TODO сделать загрузку файла
                 // all files
                 if($file) {
                     if ($file->getClientOriginalExtension() == 'php' || $file->getClientOriginalExtension() == 'exe'){
@@ -32,12 +31,22 @@ class FileController extends Controller
                 return json_encode(['success' => true, 'file' => '/files/requestFiles/'.$name]);
                 break;
             case 'avatar':
+                //images
                 if($file) {
                     $name = 'FILE'.rand(0,999999).time().'.'.$file->getClientOriginalExtension();
                     $destinationPath = public_path('/files/avatars');
                     $file->move($destinationPath, $name);
                 }
-                return json_encode(['success' => true, 'avatar' => '/files/avatars'.$name]);
+                return json_encode(['success' => true, 'avatar' => '/files/avatars/'.$name]);
+                break;
+            case 'personal':
+                //all files
+                if($file) {
+                    $name = 'FILE'.rand(0,999999).time().'.'.$file->getClientOriginalExtension();
+                    $destinationPath = public_path('/files/personal');
+                    $file->move($destinationPath, $name);
+                }
+                return json_encode(['success' => true, 'file' => '/files/personal/'.$name]);
                 break;
         }
         return json_encode(['success' => false, 'message' => 'No such type']);
@@ -47,6 +56,7 @@ class FileController extends Controller
     public static function deleteFromLocalStorage($file){
 
     }
+
 }
 
 

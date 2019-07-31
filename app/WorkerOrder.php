@@ -5,14 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Project extends Model
+class WorkerOrder extends Model
 {
     use SoftDeletes;
     protected $guarded = ['id'];
-
-
-    public function getAllOrders(){
-        return $this->hasMany(Order::class, 'projectId', 'id');
-    }
-
 }
+

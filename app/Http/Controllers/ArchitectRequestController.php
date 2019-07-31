@@ -72,4 +72,36 @@ class ArchitectRequestController extends Controller
 
         return response()->json(['success' => true], 200);
     }
+
+    public function answerRequest(Request $request){
+        $status = $request->get('status');
+        $requestId = $request->get('requestId');
+        if($status == 'true'){
+            $data = $this->acceptResponse($requestId);
+            return response()->json($data);
+        }else{
+            $data = $this->declineResponse($requestId);
+            return response()->json($data);
+        }
+    }
+
+    private function  acceptResponse($requestId){
+        $request = ArchitectRequest::find($requestId);
+        if (empty($request)){
+            return ['success' => false, 'message' => 'No such request'];
+        }
+        $request->status = 'accepted';
+        $request->save();
+        return ['success' => true];
+    }
+
+    private function declineResponse($requestId){
+        $request = ArchitectRequest::find($requestId);
+        if (empty($request)){
+            return ['success' => false, 'message' => 'No such request'];
+        }
+        $request->status = 'rejected';
+        $request->save();
+        return ['success' => true];
+    }
 }

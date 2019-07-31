@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\Project;
 use App\Role;
 use App\User;
+use App\UserFile;
 use App\UserRating;
+use App\WorkerOrder;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -83,6 +87,8 @@ class UserController extends Controller
     public function addRatingOnUser(Request $request){
         $ratableId  = $request->get('ratableId');
         $rating     = $request->get('rating');
+        $title      = $request->get('title');
+        $content    = $request->get('content');
 
         $user = User::find($ratableId);
         if (empty($user)){
@@ -91,8 +97,67 @@ class UserController extends Controller
         UserRating::create([
             'userId' => \Auth::id(),
             'rating' => $rating,
+            'title' => $title,
+            'content' => $content,
         ]);
         return response()->json(['success' => true]);
+    }
+
+    public function addPersonalFile(Request $request){
+        $id = \Auth::id();
+        $file = $request->file('file');
+        $success = json_decode(FileController::uploadPicture('personal', $file));
+        if ($success->success == false){
+            return response()->json(['success' => false, 'message' => 'Something went wrong']);
+        }
+        UserFile::create([
+            'userId' => $id,
+            'file' => $success->file,
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function getAllUserFiles(Request $request){
+        $userId = $request->get('userId');
+        $user = User::find($userId);
+        if (empty($user)){
+            return response()->json(['success' => false, 'message' => 'No such user']);
+        }
+        $files = UserFile::where('userId', $userId)->get();
+        if ($files->isEmpty()){
+            return response(['success' => false, 'message' => 'No files found']);
+        }
+
+        $data = SupportControllerCosImLazy::parseUserFiles($files);
+
+        return response()->json(['success' => true, 'value' => $data]);
+    }
+
+    public function getAllWorkerProjects(Request $request){
+        $userId = $request->get('userId');
+
+        $orders = WorkerOrder::where('userId', $userId)->get();
+        if ($orders->isEmpty()){
+            return response()->json(['success' => false, 'message' => 'User has no assigned projects']);
+        }
+        foreach ($orders as $order) {
+            $allOrders[] = Order::find($order->orderId);
+        }
+
+        $ids = [];
+        foreach ($allOrders as $allOrder) {
+            if (!in_array($allOrder->projectId, $ids)){
+                $allProjects[] = Project::find($allOrder->projectId);
+                $ids[] = $allOrder->projectId;
+            }
+        }
+//        dd($ids);
+
+        $data = SupportControllerCosImLazy::parseProjects($allProjects);
+
+        return response()->json(['success' => true, 'value' => $data]);
+
     }
 
 

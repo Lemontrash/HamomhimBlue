@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Project;
+use App\User;
+use App\UserFile;
+use App\WorkerOrder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -96,5 +99,57 @@ class ProjectController extends Controller
         $project->status = 'open';
         $project->save();
         return response()->json(['success' => true], 200);
+    }
+
+    public function getAllUsersOnProject(Request $request){
+        $projectId = $request->get('projectId');
+
+        $project = Project::find($projectId);
+        if(empty($project)){
+            return response()->json(['success' => false, 'message' => 'No such project']);
+        }
+
+        $orders = $project->getAllOrders;
+
+        foreach ($orders as $key => $order) {
+            $data[$key] = SupportControllerCosImLazy::parseAllUsersForOrder($order->id);
+        }
+        return response()->json(['success' => true, 'value' => $data]);
+    }
+
+    public function getProjectOrderForSpecificUser(Request $request){
+        $projectId = $request->get('projectId');
+        $userId = $request->get('userId');
+
+        $project = Project::find($projectId);
+        $user = User::find($userId);
+        if (empty($project) || empty($user)){
+            return response()->json(['success' => false, 'message' => 'Project or user (or both) were not found']);
+        }
+        $orders = $project->getAllOrders;
+
+        foreach ($orders as $key => $order) {
+            $workerOrders[$key] = WorkerOrder::where('orderId', $order->id)->get();
+        }
+
+        if (!isset($workerOrders)){
+            return response()->json(['success' => false, 'message' => 'No users were assigned to this project']);
+        }
+
+        foreach ($workerOrders as $workerOrder) { // сделать еще один цикл внутренний
+            dd($workerOrders);
+            if ($workerOrder->userId == $user->id){
+                $neededOrderId = $workerOrder->orderId;
+            }
+        }
+
+        if (!isset($neededOrderId)){
+            return response()->json(['success' => false, 'message' => 'This user wasnt assigned to this project']);
+        }
+
+        $neededOrder = Order::find($neededOrderId);
+        $data = SupportControllerCosImLazy::parseOrder($neededOrder);
+
+        return response()->json(['success' => true, 'value' => $data]);
     }
 }
