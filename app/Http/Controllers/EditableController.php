@@ -8,7 +8,6 @@ use App\HowItWorksWorker;
 use App\MainPage;
 use App\PrivacyPolicy;
 use App\TermsAndConditions;
-use DemeterChain\Main;
 use Illuminate\Http\Request;
 
 class EditableController extends Controller
@@ -72,6 +71,7 @@ class EditableController extends Controller
         MainPage::create([
             'text' => $text
         ]);
+        return response()->json(['success' => true]);
     }
 
     public function changeTerms(Request $request){
@@ -80,10 +80,38 @@ class EditableController extends Controller
         MainPage::create([
             'text' => $text
         ]);
+        return response()->json(['success' => true]);
     }
 
     public function changeAboutUs(Request $request){
-
+        $title          = $request->get('title');
+        $subtitle       = $request->get('subtitle');
+        $text           = $request->get('text');
+        $video          = $request->get('video');
+        $titleSecond    = $request->get('title_second');
+        $textSecond     = $request->get('text_second');
+        $titleOnBlue    = $request->get('title_on_blue');
+        $textOnBlue     = $request->get('text_on_blue');
+        $imageOnBlue    = $request->get('image_on_blue');
+        $coworkers      = $request->get('coworkers');
+        $architects     = $request->get('architects');
+        $workers        = $request->get('workers');
+        AboutUs::truncate();
+        AboutUs::create([
+            'title'         => $title,
+            'subtitle'      => $subtitle,
+            'text'          => $text,
+            'video'         => $video,
+            'title_second'  => $titleSecond,
+            'text_second'   => $textSecond,
+            'title_on_blue' => $titleOnBlue,
+            'text_on_blue'  => $textOnBlue,
+            'image_on_blue' => $imageOnBlue,
+            'coworkers'     => $coworkers,
+            'architects'    => $architects,
+            'workers'       => $workers,
+        ]);
+        return response()->json(['success' => true]);
     }
 
     public function changePrivacyPolicy(Request $request){
@@ -92,6 +120,7 @@ class EditableController extends Controller
         PrivacyPolicy::create([
             'text' => $text
         ]);
+        return response()->json(['success' => true]);
     }
 
     public function changeHowItWorksArchitect(Request $request){
@@ -103,6 +132,7 @@ class EditableController extends Controller
                 'order' => $key
             ]);
         }
+        return response()->json(['success' => true]);
     }
 
     public function changeHowItWorksWorker(Request $request){
@@ -114,5 +144,6 @@ class EditableController extends Controller
                 'order' => $key
             ]);
         }
+        return response()->json(['success' => true]);
     }
 }

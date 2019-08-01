@@ -54,3 +54,19 @@ Route::post('addRatingOnUser', 'UserController@addRatingOnUser');
 
 Route::post('architectSendRequest', 'ArchitectRequestController@architectSendRequest');
 Route::post('answerRequest', 'ArchitectRequestController@answerRequest');
+
+
+// ---------------------------------
+
+Route::post('getAlEditableContent', 'EditableController@getAlEditableContent');
+Route::post('changeMainPage', 'EditableController@changeMainPage');
+Route::post('changeTerms', 'EditableController@changeTerms');
+Route::post('changeAboutUs', 'EditableController@changeAboutUs');
+Route::post('changePrivacyPolicy', 'EditableController@changePrivacyPolicy');
+Route::post('changeHowItWorksArchitect', 'EditableController@changeHowItWorksArchitect');
+Route::post('changeHowItWorksWorker', 'EditableController@changeHowItWorksWorker');
+
+Route::post('getAllCategories', 'AdminController@getAllCategories');
+Route::post('deleteCategory', 'AdminController@deleteCategory');
+Route::post('deleteSubcategory', 'AdminController@deleteSubcategory');
+Route::post('getAllProjects', 'AdminController@getAllProjects');
