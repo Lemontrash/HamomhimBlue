@@ -18,7 +18,7 @@ class UserController extends Controller
         if ($page == 0){
             $offset = 0;
         }else{
-            $offset = 6*$page;
+            $offset = 6 * $page;
         }
 
         $roles = Role::where('role', 'worker')->take(6)->offset($offset)->get();
@@ -95,7 +95,7 @@ class UserController extends Controller
             return response()->json(['success' => false, 'message' => 'No such user']);
         }
         UserRating::create([
-            'userId' => \Auth::id(),
+            'user_id' => \Auth::id(),
             'rating' => $rating,
             'title' => $title,
             'content' => $content,
@@ -111,7 +111,7 @@ class UserController extends Controller
             return response()->json(['success' => false, 'message' => 'Something went wrong']);
         }
         UserFile::create([
-            'userId' => $id,
+            'user_id' => $id,
             'file' => $success->file,
         ]);
 

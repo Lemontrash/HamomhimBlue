@@ -58,15 +58,30 @@ Route::post('answerRequest', 'ArchitectRequestController@answerRequest');
 
 // ---------------------------------
 
-Route::post('getAlEditableContent', 'EditableController@getAlEditableContent');
-Route::post('changeMainPage', 'EditableController@changeMainPage');
-Route::post('changeTerms', 'EditableController@changeTerms');
-Route::post('changeAboutUs', 'EditableController@changeAboutUs');
-Route::post('changePrivacyPolicy', 'EditableController@changePrivacyPolicy');
-Route::post('changeHowItWorksArchitect', 'EditableController@changeHowItWorksArchitect');
-Route::post('changeHowItWorksWorker', 'EditableController@changeHowItWorksWorker');
+Route::group([
+    'prefix' => 'admin'
+], function () {
+    Route::post('getAllEditableContent', 'EditableController@getAllEditableContent');
+    Route::post('changeMainPage', 'EditableController@changeMainPage');
+    Route::post('changeTerms', 'EditableController@changeTerms');
+    Route::post('changeAboutUs', 'EditableController@changeAboutUs');
+    Route::post('changePrivacyPolicy', 'EditableController@changePrivacyPolicy');
+    Route::post('changeHowItWorksArchitect', 'EditableController@changeHowItWorksArchitect');
+    Route::post('changeHowItWorksWorker', 'EditableController@changeHowItWorksWorker');
 
-Route::post('getAllCategories', 'AdminController@getAllCategories');
-Route::post('deleteCategory', 'AdminController@deleteCategory');
-Route::post('deleteSubcategory', 'AdminController@deleteSubcategory');
-Route::post('getAllProjects', 'AdminController@getAllProjects');
+    Route::post('getAllCategories', 'AdminController@getAllCategories');
+    Route::post('deleteCategory', 'AdminController@deleteCategory');
+    Route::post('addNewCategory', 'AdminController@addNewCategory');
+    Route::post('deleteSubcategory', 'AdminController@deleteSubcategory');
+
+    Route::post('getAllProjects', 'AdminController@getAllProjects');
+    Route::post('deleteProject', 'AdminController@deleteProject');
+
+    Route::post('getAllComments', 'AdminController@getAllComments');
+
+    Route::post('getAllOrders', 'AdminController@getAllOrders');
+    Route::post('deleteOrder', 'AdminController@deleteOrder');
+    Route::post('changeOrder', 'AdminController@changeOrder');
+
+});
+

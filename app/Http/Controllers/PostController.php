@@ -71,7 +71,7 @@ class PostController extends Controller
 
     public function addFullPostAddContent($content, $order){
         PostContent::create([
-            'postId' => $this->post->id,
+            'post_id' => $this->post->id,
             'content' => $content,
             'order' => $order
         ]);
@@ -79,7 +79,7 @@ class PostController extends Controller
 
     public function addFullPostAddImage($image, $description, $order){
         PostImage::create([
-            'postId' => $this->post->id,
+            'post_id' => $this->post->id,
             'image' => $image,
             'order' => $order,
             'description' => $description
@@ -88,10 +88,10 @@ class PostController extends Controller
 
     public function addFullPostAddImageAndText($image,$content, $position, $order){
         PostImageAndText::create([
-            'postId' => $this->post->id,
+            'post_id' => $this->post->id,
             'image' => $image,
             'content' => $content,
-            'imagePosition' => $position,
+            'image_position' => $position,
             'order' => $order
         ]);
     }

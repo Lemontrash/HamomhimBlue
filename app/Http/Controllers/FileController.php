@@ -48,6 +48,15 @@ class FileController extends Controller
                 }
                 return json_encode(['success' => true, 'file' => '/files/personal/'.$name]);
                 break;
+            case 'categoryImage':
+                //all files
+                if($file) {
+                    $name = 'FILE'.rand(0,999999).time().'.'.$file->getClientOriginalExtension();
+                    $destinationPath = public_path('/files/categoryImages');
+                    $file->move($destinationPath, $name);
+                }
+                return json_encode(['success' => true, 'file' => '/files/personal/'.$name]);
+                break;
         }
         return json_encode(['success' => false, 'message' => 'No such type']);
     }

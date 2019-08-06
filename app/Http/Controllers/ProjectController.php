@@ -24,14 +24,14 @@ class ProjectController extends Controller
         $project = Project::create([
             'name'          => $projectName,
             'description'   => $projectDescription,
-            'userId'        => 1,
+            'user_id'       => \Auth::id(),
             'status'        => 'open'
 //            'userId'        => \Auth::id(),
         ]);
 
         $order = Order::create([
-            'projectId'     => $project->id,
-            'categoryId'    => $categoryId,
+            'project_id'    => $project->id,
+            'category_id'   => $categoryId,
             'subcategoryId' => $subcategoryId,
             'name'          => $orderName,
             'work_area'     => $orderWorkArea,
@@ -43,7 +43,7 @@ class ProjectController extends Controller
 
 
     public function getAllProjectsByUser(){
-        $projects = Project::where('userId', \Auth::id())->where('status', 'open')->get();
+        $projects = Project::where('user_id', \Auth::id())->where('status', 'open')->get();
 
         if ($projects->isEmpty()){
             return response()->json(['success' => false, 'message' => 'No projects found'], 200);
@@ -69,9 +69,9 @@ class ProjectController extends Controller
         }
 
         $order = Order::create([
-            'projectId'     => $project->id,
-            'categoryId'    => $categoryId,
-            'subcategoryId' => $subcategoryId,
+            'project_id'     => $project->id,
+            'category_id'    => $categoryId,
+            'subcategory_id' => $subcategoryId,
             'name'          => $orderName,
             'work_area'     => $orderWorkArea,
             'description'   => $orderDescription,
@@ -129,7 +129,7 @@ class ProjectController extends Controller
         $orders = $project->getAllOrders;
 
         foreach ($orders as $key => $order) {
-            $workerOrders[$key] = WorkerOrder::where('orderId', $order->id)->get();
+            $workerOrders[$key] = WorkerOrder::where('order_id', $order->id)->get();
         }
 
         if (!isset($workerOrders)){
@@ -139,7 +139,7 @@ class ProjectController extends Controller
         foreach ($workerOrders as $workerOrder) { // сделать еще один цикл внутренний
             dd($workerOrders);
             if ($workerOrder->userId == $user->id){
-                $neededOrderId = $workerOrder->orderId;
+                $neededOrderId = $workerOrder->order_id;
             }
         }
 

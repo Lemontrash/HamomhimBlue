@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class EditableController extends Controller
 {
-    public function getAlEditableContent(){
+    public function getAllEditableContent(){
         $data['mainPage']            = $this->getMainPage();
         $data['termsAndConditions']  = $this->getTerms();
         $data['aboutUs']             = $this->getAboutUs();
