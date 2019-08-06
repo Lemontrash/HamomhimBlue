@@ -23,6 +23,7 @@ class AuthController extends Controller
             'fax'               => 'required|string|max:191',
             'name_of_business'  => 'required|string|max:191',
         ]);
+//        dd($request->city);
         $user = new User([
             'name'              => $request->name,
             'email'             => $request->email,
