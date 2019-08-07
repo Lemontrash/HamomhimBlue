@@ -14,7 +14,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name'              => 'required|string',
-            'email'             => 'required|string|email|',
+            'email'             => 'required|string|email',
             'password'          => 'required|string|confirmed',
             'city'              => 'required|string|max:191',
             'address'           => 'required|string|max:191',
@@ -24,7 +24,12 @@ class AuthController extends Controller
             'fax'               => 'required|string|max:191',
             'name_of_business'  => 'required|string|max:191',
         ]);
-//        dd($request->city);
+        $role = $request->role;
+        $user = User::where('email', $request->email)->where('role', $role)->first();
+        if (!empty($user)){
+            return response()->json(['success' => false, 'message' => 'user with the same email and role already exists']);
+        }
+
         $user = new User([
             'name'              => $request->name,
             'email'             => $request->email,
@@ -36,22 +41,11 @@ class AuthController extends Controller
             'working_area'      => $request->working_area,
             'fax'               => $request->fax,
             'name_of_business'  => $request->name_of_business,
+            'role'              => $role
         ]);
 
         $user->save();
 
-//        dd($user);
-        if($request->role == 'worker'){
-            Role::create([
-                'user_id' => $user->id,
-                'role' => 'worker'
-            ]);
-        }else{
-            Role::create([
-                'user_id' => $user->id,
-                'role' => 'architect'
-            ]);
-        }
         return response()->json([
             'success' => true,
             'message' => 'Successfully created user!'
@@ -66,7 +60,7 @@ class AuthController extends Controller
             'password' => 'required|string|max:191',
             'remember_me' => 'boolean',
         ]);
-        $credentials = request(['email', 'password']);
+        $credentials = request(['email', 'password', 'role']);
         if(!\Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
