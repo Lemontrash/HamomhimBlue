@@ -122,7 +122,7 @@ class AdminController extends Controller
         $id = $request->get('userId');
         $user = User::find($id);
         if (empty($user)){
-            return response()->json(['succes' => false, 'message' => 'bo such user']);
+            return response()->json(['success' => false, 'message' => 'bo such user']);
         }
         User::where('id', $id)->delete();
         return response()->json(['success' => true]);
