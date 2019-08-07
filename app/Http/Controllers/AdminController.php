@@ -105,12 +105,12 @@ class AdminController extends Controller
         $users = User::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
 
         $users = SupportControllerCosImLazy::parseUsers($users);
-        foreach ($users as $key => $user) {
-            $role = Role::where('user_id', $user['id'])->first();
-
-            $users[$key]['role'] = $role->role;
-
-        }
+//        foreach ($users as $key => $user) {
+//            $role = Role::where('user_id', $user['id'])->first();
+//
+//            $users[$key]['role'] = $role->role;
+//
+//        }
         return response()->json(['success' => true, 'value' => $users]);
     }
 

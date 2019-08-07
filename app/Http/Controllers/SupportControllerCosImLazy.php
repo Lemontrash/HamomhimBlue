@@ -23,6 +23,7 @@ class SupportControllerCosImLazy extends Controller
                 $data[$key]['business_phone']   = $user->business_phone;
                 $data[$key]['working_area']     = $user->working_area;
                 $data[$key]['fax']              = $user->fax;
+                $data[$key]['role']              = $user->role;
                 $data[$key]['created_at']       = $user->created_at->timestamp;
                 $data[$key]['updated_at']       = $user->updated_at->timestamp;
             }
@@ -38,6 +39,7 @@ class SupportControllerCosImLazy extends Controller
                 $data['business_phone']   = $users->business_phone;
                 $data['working_area']     = $users->working_area;
                 $data['fax']              = $users->fax;
+                $data['role']             = $users->role;
                 $data['created_at']       = $users->created_at->timestamp;
                 $data['updated_at']       = $users->updated_at->timestamp;
             }
