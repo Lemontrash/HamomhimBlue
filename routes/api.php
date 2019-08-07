@@ -83,5 +83,8 @@ Route::group([
     Route::post('deleteOrder', 'AdminController@deleteOrder');
     Route::post('changeOrder', 'AdminController@changeOrder');
 
+
+    Route::post('getAllUsers', 'AdminController@getAllUsers');
+    Route::post('getUserCounter', 'AdminController@getUserCounter');
 });
 

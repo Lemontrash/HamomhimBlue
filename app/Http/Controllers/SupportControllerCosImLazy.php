@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\WorkerOrder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class SupportControllerCosImLazy extends Controller
 {
     public static function parseUsers( $users){
-        if (is_array($users)){
+//        dd();
+        if ($users instanceof Collection){
             foreach ($users as $key => $user) {
                 $data[$key]['id']               = $user->id;
                 $data[$key]['name']             = $user->name;
@@ -102,7 +104,7 @@ class SupportControllerCosImLazy extends Controller
     }
 
     public static function parseOrder($orders){
-        if (is_array($orders)){
+        if ($orders instanceof Collection){
             foreach ($orders as $key => $order) {
                 $data[$key]['id']             = $order->id;
                 $data[$key]['projectId']      = $order->project_id;

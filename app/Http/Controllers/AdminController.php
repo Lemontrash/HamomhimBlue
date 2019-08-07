@@ -10,6 +10,7 @@ use App\MainPage;
 use App\Order;
 use App\PrivacyPolicy;
 use App\Project;
+use App\Role;
 use App\Subcategory;
 use App\TermsAndConditions;
 use App\User;
@@ -84,6 +85,48 @@ class AdminController extends Controller
         }
 
         return response()->json(['success' => true, 'value' => $projects]);
+    }
+
+
+    public function getAllUsers(Request $request){
+        $page    = $request->get('page');
+        $sortBy  = $request->get('sortBy');
+        $orderBy = $request->get('orderBy');
+        $take    = $request->get('take');
+
+        if ($orderBy != 'ASC' && $orderBy != 'DESC'){
+            return response()->json(['success' => false, 'message' => 'wrong order by']);
+        }
+        if ($page == 0){
+            $offset = 0;
+        }else{
+            $offset = $page * 20;
+        }
+        $users = User::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
+
+        $users = SupportControllerCosImLazy::parseUsers($users);
+        foreach ($users as $key => $user) {
+            $role = Role::where('user_id', $user['id'])->first();
+
+            $users[$key]['role'] = $role->role;
+
+        }
+        return response()->json(['success' => true, 'value' => $users]);
+    }
+
+    public function getUserCounter(){
+        return response()->json(['success' => true, 'value' => User::count()]);
+    }
+
+    public function deleteUser(Request $request){
+        $id = $request->get('userId');
+        $user = User::find($id);
+        if (empty($user)){
+            return response()->json(['succes' => false, 'message' => 'bo such user']);
+        }
+        User::where('id', $id)->delete();
+        return response()->json(['success' => true]);
+
     }
 
     public function getAllComments(){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name'              => 'required|string',
-            'email'             => 'required|string|email|unique:users',
+            'email'             => 'required|string|email|',
             'password'          => 'required|string|confirmed',
             'city'              => 'required|string|max:191',
             'address'           => 'required|string|max:191',
@@ -36,7 +37,21 @@ class AuthController extends Controller
             'fax'               => $request->fax,
             'name_of_business'  => $request->name_of_business,
         ]);
+
         $user->save();
+
+//        dd($user);
+        if($request->role == 'worker'){
+            Role::create([
+                'user_id' => $user->id,
+                'role' => 'worker'
+            ]);
+        }else{
+            Role::create([
+                'user_id' => $user->id,
+                'role' => 'architect'
+            ]);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Successfully created user!'
