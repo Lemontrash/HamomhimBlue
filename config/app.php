@@ -169,7 +169,7 @@ return [
         /*
          * Application Service Providers...
          */
-//        \Laravel\Passport\PassportServiceProvider::class,
+        \Laravel\Passport\PassportServiceProvider::class,
 //        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
