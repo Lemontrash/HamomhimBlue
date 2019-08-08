@@ -22,7 +22,9 @@ class CategoryController extends Controller
     public function getAllCategories(){
         $categories = Category::all();
 //        dd($categories);
-
+        if ($categories->isEmpty()){
+            return response()->json(['success' => true, 'value' => []]);
+        }
         $data = SupportControllerCosImLazy::parseCategories($categories);
         return response()->json($data);
     }

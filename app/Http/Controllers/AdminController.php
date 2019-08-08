@@ -22,7 +22,9 @@ class AdminController extends Controller
     public function getAllCategories(){
 
         $categories = Category::all();
-        dd($categories);
+        if ($categories->isEmpty()){
+            return response()->json(['success' => true, 'value' => []]);
+        }
         $categories = SupportControllerCosImLazy::parseCategories($categories);
         return response()->json(['success' => true, 'value' => $categories]);
     }
