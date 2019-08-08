@@ -20,7 +20,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function getAllCategories(){
+
         $categories = Category::all();
+        dd($categories);
         $categories = SupportControllerCosImLazy::parseCategories($categories);
         return response()->json(['success' => true, 'value' => $categories]);
     }

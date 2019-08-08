@@ -21,8 +21,8 @@ class CategoryController extends Controller
 
     public function getAllCategories(){
         $categories = Category::all();
-        dd($categories);
-        
+//        dd($categories);
+
         $data = SupportControllerCosImLazy::parseCategories($categories);
         return response()->json($data);
     }

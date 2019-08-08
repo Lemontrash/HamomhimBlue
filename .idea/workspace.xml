@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a696cc3d-657c-4239-9fcb-a49695ba9e1d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CategoryController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="21" column="36" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="36" />
+            <state relative-caret-position="391">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -196,7 +195,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/migrations/2019_07_15_153127_create_orders_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_16_123549_create_architect_requests_table.php" />
         <option value="$PROJECT_DIR$/app/FavouritePosts.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_07_17_112609_create_user_files_table.php" />
@@ -247,6 +245,7 @@
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SupportControllerCosImLazy.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" />
       </list>
     </option>
   </component>
@@ -529,7 +528,7 @@
       <workItem from="1565097610716" duration="857000" />
       <workItem from="1565156271096" duration="14722000" />
       <workItem from="1565240789869" duration="1474000" />
-      <workItem from="1565245468480" duration="7035000" />
+      <workItem from="1565245468480" duration="7282000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit + reg">
       <created>1562940282979</created>
@@ -713,11 +712,18 @@
       <option name="project" value="LOCAL" />
       <updated>1565261991045</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Big commit">
+      <created>1565267622503</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1565267622503</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137817000" />
+    <option name="totallyTimeSpent" value="138064000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -1167,8 +1173,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CategoryController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" column="36" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="36" />
+        <state relative-caret-position="391">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
         </state>
       </provider>
     </entry>
