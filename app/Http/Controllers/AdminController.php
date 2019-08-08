@@ -26,7 +26,7 @@ class AdminController extends Controller
     }
 
     public function deleteCategory(Request $request){
-        $id = $request->get('id');
+        $id = $request->geta('id');
         $category = Category::find($id);
 
         if(empty($category)){
