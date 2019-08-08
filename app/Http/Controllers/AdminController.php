@@ -103,7 +103,9 @@ class AdminController extends Controller
             $offset = $page * 20;
         }
         $users = User::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
-
+        if ($page == 1){
+            dd($users);
+        }
         $userData['users'] = SupportControllerCosImLazy::parseUsers($users);
         $userData['total'] = $this->getUserCounter();
 
