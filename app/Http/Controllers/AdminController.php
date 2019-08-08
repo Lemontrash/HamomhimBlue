@@ -104,10 +104,10 @@ class AdminController extends Controller
         }
         $users = User::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
 
-        $users['users'] = SupportControllerCosImLazy::parseUsers($users);
-        $users['total'] = $this->getUserCounter();
+        $userData['users'] = SupportControllerCosImLazy::parseUsers($users);
+        $userData['total'] = $this->getUserCounter();
 
-        return response()->json(['success' => true, 'value' => $users]);
+        return response()->json(['success' => true, 'value' => $userData]);
     }
 
     public function getUserCounter(){
