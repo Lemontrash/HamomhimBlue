@@ -93,21 +93,44 @@ class AdminController extends Controller
         $sortBy  = $request->get('sortBy');
         $orderBy = $request->get('orderBy');
         $take    = $request->get('take');
-
+        $search = $request->get('search');
         if ($orderBy != 'ASC' && $orderBy != 'DESC'){
             return response()->json(['success' => false, 'message' => 'wrong order by']);
         }
-        if ($page == 0){
-            $offset = 0;
-        }else{
-            $offset = $page * $take;
-        }
-        $users = User::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
 
-//        if ($users->isEmpty()){
-//            return response()->json(['success' => false, 'message' => 'no users']);
-//        }
-        $userData['users'] = SupportControllerCosImLazy::parseUsers($users);
+
+        if (isset($search)){
+            $users = User::where('name', $search)
+                         ->orWhere('name', 'LIKE', '%'.$search.'%')
+                         ->orWhere('email', $search)
+                         ->orWhere('email', 'LIKE', '%'.$search.'%')
+                         ->orWhere('phone', $search)
+                         ->orWhere('phone', 'LIKE', '%'.$search.'%')
+                         ->orderBy($sortBy, $orderBy)
+                         ->get();
+            if ($users->isEmpty()){
+                $userData['users'] = [];
+            }else{
+                $userData['users'] = SupportControllerCosImLazy::parseUsers($users);
+            }
+        }else{
+            if ($take == -1){
+                $users = User::orderBy($sortBy, $orderBy)->get();
+                $userData['users'] = SupportControllerCosImLazy::parseUsers($users);
+            }else{
+
+                if ($page == 0){
+                    $offset = 0;
+                }else{
+                    $offset = $page * $take;
+                }
+                $users = User::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
+
+                $userData['users'] = SupportControllerCosImLazy::parseUsers($users);
+            }
+        }
+
+
         $userData['total'] = $this->getUserCounter();
 
         return response()->json(['success' => true, 'value' => $userData]);
@@ -182,5 +205,44 @@ class AdminController extends Controller
         }
         Project::where('id', $id)->delete();
         return response()->json(['success' => true]);
+    }
+
+    public function addNewUser(Request $request){
+        $name               = $request->name;
+        $email              = $request->email;
+        $city               = $request->city;
+        $address            = $request->address;
+        $phone              = $request->phone;
+        $name_of_business   = $request->name_of_business;
+        $business_phone     = $request->business_phone;
+        $working_area       = $request->working_area;
+        $fax                = $request->fax;
+        $password           = $request->password;
+        $is_active          = $request->is_active;
+        $is_approved        = $request->is_approved;
+        $role               = $request->role;
+
+        $sameUser = User::where('email', $email)->where('role', $role)->first();
+        if (!empty($sameUser)){
+            return response()->json(['success' => false, 'message' => 'user with the same role and email already exists']);
+        }
+
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'city' => $city,
+            'address' => $address,
+            'phone' => $phone,
+            'name_of_business' => $name_of_business,
+            'business_phone' => $business_phone,
+            'working_area' => $working_area,
+            'fax' => $fax,
+            'password' => bcrypt($password) ,
+            'is_active' => $is_active,
+            'is_approved' => $is_approved,
+            'role' => $role
+        ]);
+        $fullUser = SupportControllerCosImLazy::parseUsers($user);
+        return response()->json(['success' => true, 'value' => $fullUser]);
     }
 }
