@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a696cc3d-657c-4239-9fcb-a49695ba9e1d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -368,9 +367,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -521,7 +520,7 @@
       <workItem from="1565095637401" duration="916000" />
       <workItem from="1565097610716" duration="857000" />
       <workItem from="1565156271096" duration="14722000" />
-      <workItem from="1565240789869" duration="1454000" />
+      <workItem from="1565240789869" duration="1474000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit + reg">
       <created>1562940282979</created>
@@ -642,11 +641,18 @@
       <option name="project" value="LOCAL" />
       <updated>1565181022818</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Big commit">
+      <created>1565244432319</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1565244432319</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130762000" />
+    <option name="totallyTimeSpent" value="130782000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
