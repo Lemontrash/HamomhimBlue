@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class SupportControllerCosImLazy extends Controller
 {
     public static function parseUsers( $users){
-        print_r($users);
         if ($users instanceof Collection){
             foreach ($users as $key => $user) {
                 $data[$key]['id']               = $user->id;
