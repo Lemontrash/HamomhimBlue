@@ -45,6 +45,7 @@ class AdminController extends Controller
         $categoryName = $request->get('categoryName');
         $image = $request->file('image');
         $image = json_decode(FileController::uploadPicture('categoryImage', $image));
+        dd($image);
         $category = Category::create([
             'name' => $categoryName,
             'image' => $image['file']
