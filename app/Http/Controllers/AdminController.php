@@ -59,7 +59,7 @@ class AdminController extends Controller
                 ]);
             }
         }
-        return response()->json(['success' => true, 'value' => $category->id]);
+        return response()->json(['success' => true, 'id' => $category->id]);
     }
 
     public function deleteSubcategory(Request $request){
