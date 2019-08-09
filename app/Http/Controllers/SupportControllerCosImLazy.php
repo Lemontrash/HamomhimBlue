@@ -67,16 +67,28 @@ class SupportControllerCosImLazy extends Controller
     }
 
     public static function parseCategories( $categories){
-        foreach ($categories as $key => $category) {
-            $subcatetegories = $category->getAllSubcategories;
-            $data[$key]['id']           = $category->id;
-            $data[$key]['name']         = $category->name;
-            $data[$key]['image']        = $category->image;
-            $data[$key]['created_at']   = $category->created_at->timestamp;
+        if ($categories instanceof Collection){
+            foreach ($categories as $key => $category) {
+                $subcatetegories = $category->getAllSubcategories;
+                $data[$key]['id']           = $category->id;
+                $data[$key]['name']         = $category->name;
+                $data[$key]['image']        = $category->image;
+                $data[$key]['created_at']   = $category->created_at->timestamp;
+                if (!$subcatetegories->isEmpty()){
+                    $data[$key]['subcategories'] = $subcatetegories;
+                }
+            }
+        }else{
+            $subcatetegories = $categories->getAllSubcategories;
+            $data['id']           = $categories->id;
+            $data['name']         = $categories->name;
+            $data['image']        = $categories->image;
+            $data['created_at']   = $categories->created_at->timestamp;
             if (!$subcatetegories->isEmpty()){
-                $data[$key]['subcategories'] = $subcatetegories;
+                $data['subcategories'] = $subcatetegories;
             }
         }
+
         return $data;
     }
 

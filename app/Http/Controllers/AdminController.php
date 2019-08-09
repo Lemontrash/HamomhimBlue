@@ -59,6 +59,7 @@ class AdminController extends Controller
                 ]);
             }
         }
+        $category = SupportControllerCosImLazy::parseCategories($category);
         return response()->json(['success' => true, 'id' => $category->id]);
     }
 
