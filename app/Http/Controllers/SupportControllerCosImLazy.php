@@ -47,13 +47,21 @@ class SupportControllerCosImLazy extends Controller
         return $data;
     }
 
-    public static function parseProjects( $projects){
-        foreach ($projects as $key => $project) {
-            $data[$key]['id']           = $project->id;
-            $data[$key]['name']         = $project->name;
-            $data[$key]['description']  = $project->description;
-            $data[$key]['userId']       = $project->user_id;
-            $data[$key]['created_at']   = $project->created_at->timestamp;
+    public static function parseProjects($projects){
+        if ($projects instanceof Collection){
+            foreach ($projects as $key => $project) {
+                $data[$key]['id']           = $project->id;
+                $data[$key]['name']         = $project->name;
+                $data[$key]['description']  = $project->description;
+                $data[$key]['userId']       = $project->user_id;
+                $data[$key]['created_at']   = $project->created_at->timestamp;
+            }
+        }else{
+            $data['id']           = $projects->id;
+            $data['name']         = $projects->name;
+            $data['description']  = $projects->description;
+            $data['userId']       = $projects->user_id;
+            $data['created_at']   = $projects->created_at->timestamp;
         }
         return $data;
     }

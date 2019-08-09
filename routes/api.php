@@ -75,6 +75,7 @@ Route::group([
     Route::post('deleteSubcategory', 'AdminController@deleteSubcategory');
 
     Route::post('getAllProjects', 'AdminController@getAllProjects');
+    Route::post('getSingleProject', 'AdminController@getSingleProject');
     Route::post('deleteProject', 'AdminController@deleteProject');
 
     Route::post('getAllComments', 'AdminController@getAllComments');

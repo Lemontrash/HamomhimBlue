@@ -73,22 +73,93 @@ class AdminController extends Controller
         return response()->json(['success' => true]);
     }
 
-    //@TODO сделать сортировку, ордеры и юзеров
     public function getAllProjects(Request $request){
-        $sort = $request->get('sort');
-        $sortOrder = $request->get('order');
-        if($sort == 'projectName'){
-            $projects = Project::orderBy('name', $sortOrder)->get();
-            $projects = SupportControllerCosImLazy::parseProjects($projects);
-            foreach ($projects as $key => $project){
-                $order = Order::where('project_id', $project['id'])->get();
-                $projects[$key]['orders'] = json_decode(SupportControllerCosImLazy::parseOrder($order));
-                $user = User::where('id', $project['user_id'])->get();
-                $projects[$key]['user'] = json_decode(SupportControllerCosImLazy::parseUsers($user));
-            }
+        $page    = $request->get('page');
+        $sortBy  = $request->get('sortBy');
+        $orderBy = $request->get('orderBy');
+        $take    = $request->get('take');
+        $search = $request->get('search');
+        if ($orderBy != 'ASC' && $orderBy != 'DESC'){
+            return response()->json(['success' => false, 'message' => 'wrong order by']);
         }
 
-        return response()->json(['success' => true, 'value' => $projects]);
+        if(isset($search)){
+            $projects = Project::where('name', $search)->orWhere('name', 'LIKE', $search)->orderBy($sortBy, $orderBy)->get();
+        }else{
+            if($take != 0){
+                $projects = Project::orderBy($sortBy,$orderBy)->get();
+            }else{
+                if ($page == 0){
+                    $offset = 0;
+                }else{
+                    $offset = $take * $page;
+                }
+                $projects = Project::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
+            }
+        }
+        if ($projects->isEmpty()){
+            return response()->json(['success' => true, 'value' => []]);
+        }
+        $projectData['projects'] = SupportControllerCosImLazy::parseProjects($projects);
+        $projectData['total']    = $this->getProjectCounter();
+        return response()->json(['success' => true, 'value' => $projectData]);
+    }
+    
+    public function getSingleProject(Request $request){
+        $id = $request->get('projectId');
+        $project = Project::find($id);
+        if (empty($project)){
+            return response()->json(['success' => false, 'message' => 'no such project']);
+        }
+
+        $projectData['orders'] = $project->getAllOrders;
+        $projectData['project'] = SupportControllerCosImLazy::parseProjects($project);
+
+        if ($project->isEmpty()){
+            return response()->json(['success' => true, 'value' => []]);
+        }
+
+        return response()->json(['success' => true, 'value' => $projectData]);
+    }
+    
+    public function getAllOrders(Request $request){
+        $page    = $request->get('page');
+        $sortBy  = $request->get('sortBy');
+        $orderBy = $request->get('orderBy');
+        $take    = $request->get('take');
+        $search = $request->get('search');
+        if ($orderBy != 'ASC' && $orderBy != 'DESC'){
+            return response()->json(['success' => false, 'message' => 'wrong order by']);
+        }
+
+        if(isset($search)){
+            $orders = Order::where('name', $search)
+                             ->orWhere('name', 'LIKE', $search)
+                             ->orWhere('work_area', $search)
+                             ->orWhere('work_area', 'LIKE', $search)
+                             ->orWhere('description', $search)
+                             ->orWhere('description', 'LIKE', $search)
+                             ->orderBy($sortBy, $orderBy)
+                             ->get();
+        }else{
+            if($take != 0){
+                $orders = Order::orderBy($sortBy,$orderBy)->get();
+            }else{
+                if ($page == 0){
+                    $offset = 0;
+                }else{
+                    $offset = $take * $page;
+                }
+                $orders = Order::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
+            }
+        }
+        if ($orders->isEmpty()){
+            return response()->json(['success' => true, 'value' => []]);
+        }
+
+        $orderData['orders'] = SupportControllerCosImLazy::parseOrder($orders);
+        $orderData['total']  = $this->getOrderCounter();
+        return response()->json(['success' => true, 'value' => $orderData]);
     }
 
 
@@ -144,6 +215,14 @@ class AdminController extends Controller
         return  User::count();
     }
 
+    public function getProjectCounter(){
+        return  Project::count();
+    }
+
+    public function getOrderCounter(){
+        return  Order::count();
+    }
+
     public function deleteUser(Request $request){
         $id = $request->get('userId');
         $user = User::find($id);
@@ -158,14 +237,9 @@ class AdminController extends Controller
     public function getAllComments(){
         $ratings = UserRating::all();
         $ratings = SupportControllerCosImLazy::parseUserRatings($ratings);
-        return response()->json(['sucess' => true, 'value' => $ratings]);
+        return response()->json(['success' => true, 'value' => $ratings]);
     }
 
-    public function getAllOrders(){
-        $orders = Order::all();
-        $orders = SupportControllerCosImLazy::parseOrder($orders);
-        return response()->json(['sucess' => true, 'value' => $orders]);
-    }
 
     public function deleteOrder(Request $request){
         $id = $request->get('id');
