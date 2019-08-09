@@ -8,6 +8,7 @@ use App\HowItWorksArchitect;
 use App\HowItWorksWorker;
 use App\MainPage;
 use App\Order;
+use App\Post;
 use App\PrivacyPolicy;
 use App\Project;
 use App\Role;
@@ -225,11 +226,15 @@ class AdminController extends Controller
         return  Order::count();
     }
 
+    public function getPostsCounter(){
+        return  Post::count();
+    }
+
     public function deleteUser(Request $request){
         $id = $request->get('userId');
         $user = User::find($id);
         if (empty($user)){
-            return response()->json(['success' => false, 'message' => 'bo such user']);
+            return response()->json(['success' => false, 'message' => 'no such user']);
         }
         User::where('id', $id)->delete();
         return response()->json(['success' => true]);
@@ -379,7 +384,7 @@ class AdminController extends Controller
             $category->image = $file->file;
         }
         $category->save();
-
+        return response()->json(['success' => true]);
     }
 
     public function editOrder(Request $request){
@@ -388,5 +393,151 @@ class AdminController extends Controller
         if (empty($order)){
             return response()->json(['success' => false, 'message' => 'no such order']);
         }
+
+        $order->project_id      = $request->projectId;
+        $order->category_id     = $request->categoryId;
+        $order->subcategory_id  = $request->subcategoryId;
+        $order->name            = $request->name;
+        $order->work_area       = $request->work_area;
+        $order->description     = $request->description;
+
+        $order->save();
+
+        return response()->json(['success' => true]);
     }
+
+
+    public function getSingleOrder(Request $request){
+        $id = $request->get('orderId');
+        $order = Order::find($id);
+
+        if (empty($order)){
+            return response()->json(['success' => false, 'message' => 'no such order']);
+        }
+
+        $project = Project::find($order->project_id);
+        $category = Category::find($order->category_id);
+
+        $orderData['order'] = SupportControllerCosImLazy::parseOrder($order);
+        $orderData['project'] = SupportControllerCosImLazy::parseProjects($project);
+        $orderData['category'] = SupportControllerCosImLazy::parseCategories($category);
+
+        return response()->json(['success' => true, 'value' => $orderData]);
+    }
+
+    public function addNewProject(Request $request){
+        $name = $request->name;
+        $description = $request->description;
+        $userId = $request->userId;
+        $status = $request->status;
+
+        $user = User::find($userId);
+        if (empty($user)){
+            return response()->json(['success' => false, 'message' => 'no such user']);
+        }
+        Project::create([
+            'name' => $name,
+            'description' => $description,
+            'user_id' => $userId,
+            'status' => $status
+        ]);
+        return response()->json(['success' => true]);
+    }
+
+
+    public function addPost(Request $request){
+        $title = $request->get('title');
+        $content = $request->get('content');
+        $thumbnail = $request->file('thumbnail');
+        $author = $request->author;
+
+        $thumbnail = FileController::uploadPicture('post', $thumbnail);
+        Post::create([
+            'author' => $author,
+            'content' => $content,
+            'title' => $title,
+            'thumbnail' => $thumbnail->file,
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function editPost(Request $request){
+        $id = $request->get('postId');
+
+        $post = Post::find($id);
+        if (empty($post)){
+            return response()->json(['success' => false,'message' => 'no such post']);
+        }
+
+        $post->author = $request->author;
+        $post->content = $request->get('content');
+        $post->title = $request->title;
+        if (!empty($request->file('thumbnail'))){
+            $thumbnail = FileController::uploadPicture('post', $request->file('thumbnail'));
+            $post->thumbnail = $thumbnail->file;
+        }
+        $post->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function deletePost(Request $request){
+        $id = $request->get('postId');
+        $post = Post::find($id);
+
+        if (empty($post)){
+            return response()->json(['success' => false, 'message' => 'no such post']);
+        }
+
+        Post::where('id', $id)->delete();
+        return response()->json(['success' => true]);
+    }
+
+    public function getSinglePost(Request $request){
+        $id = $request->get('postId');
+        $post = Post::find($id);
+
+        if (empty($post)){
+            return response()->json(['success' => false, 'message' => 'no such post']);
+        }
+
+        $post = SupportControllerCosImLazy::parsePosts($post);
+        return response(['success' => true, 'value' => $post]);
+    }
+
+    public function getAllPosts(Request $request){
+        $page    = $request->get('page');
+        $sortBy  = $request->get('sortBy');
+        $orderBy = $request->get('orderBy');
+        $take    = $request->get('take');
+        $search = $request->get('search');
+        if ($orderBy != 'ASC' && $orderBy != 'DESC'){
+            return response()->json(['success' => false, 'message' => 'wrong order by']);
+        }
+
+        if(isset($search)){
+            $posts = Post::where('title', $search)->orWhere('title', 'LIKE', $search)->orderBy($sortBy, $orderBy)->get();
+        }else{
+            if($take != 0){
+                $posts = Post::orderBy($sortBy,$orderBy)->get();
+            }else{
+                if ($page == 0){
+                    $offset = 0;
+                }else{
+                    $offset = $take * $page;
+                }
+                $posts = Post::take($take)->offset($offset)->orderBy($sortBy, $orderBy)->get();
+            }
+        }
+        if ($posts->isEmpty()){
+            return response()->json(['success' => true, 'value' => []]);
+        }
+
+        $postData['posts'] = SupportControllerCosImLazy::parsePosts($posts);
+        $postData['total'] = $this->getPostsCounter();
+
+        return response()->json(['success' => true, 'value' => $postData]);
+    }
+
+
 }

@@ -163,4 +163,29 @@ class SupportControllerCosImLazy extends Controller
         return $data;
     }
 
+
+    public static function parsePosts($posts){
+        if ($posts instanceof Collection){
+            foreach ($posts as $key => $post) {
+                $data[$key]['id']           = $post->id;
+                $data[$key]['author']       = $post->author;
+                $data[$key]['title']        = $post->title;
+                $data[$key]['content']      = $post->content;
+                $data[$key]['thumbnail']    = $post->thumbnail;
+                $data[$key]['created_at']   = $post->created_at->timestamp;
+                $data[$key]['updated_at']   = $post->updated_at->timestamp;
+            }
+        }else{
+            $data['id']           = $posts->id;
+            $data['author']       = $posts->author;
+            $data['title']        = $posts->title;
+            $data['content']      = $posts->content;
+            $data['thumbnail']    = $posts->thumbnail;
+            $data['created_at']   = $posts->created_at->timestamp;
+            $data['updated_at']   = $posts->updated_at->timestamp;
+        }
+
+        return $data;
+    }
+
 }
