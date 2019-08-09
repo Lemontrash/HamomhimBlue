@@ -91,5 +91,6 @@ Route::group([
     Route::post('getAllUsers', 'AdminController@getAllUsers');
     Route::post('getUserCounter', 'AdminController@getUserCounter');
     Route::post('editUser', 'AdminController@editUser');
+    Route::post('deleteUser', 'AdminController@deleteUser');
 });
 
