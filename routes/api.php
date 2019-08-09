@@ -77,6 +77,7 @@ Route::group([
     Route::post('getAllProjects', 'AdminController@getAllProjects');
     Route::post('getSingleProject', 'AdminController@getSingleProject');
     Route::post('deleteProject', 'AdminController@deleteProject');
+    Route::post('editProject', 'AdminController@editProject');
 
     Route::post('getAllComments', 'AdminController@getAllComments');
 
@@ -87,5 +88,6 @@ Route::group([
 
     Route::post('getAllUsers', 'AdminController@getAllUsers');
     Route::post('getUserCounter', 'AdminController@getUserCounter');
+    Route::post('editUser', 'AdminController@editUser');
 });
 

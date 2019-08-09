@@ -30,7 +30,7 @@ class AdminController extends Controller
     }
 
     public function deleteCategory(Request $request){
-        $id = $request->geta('id');
+        $id = $request->get('id');
         $category = Category::find($id);
 
         if(empty($category)){
@@ -324,5 +324,57 @@ class AdminController extends Controller
         ]);
         $fullUser = SupportControllerCosImLazy::parseUsers($user);
         return response()->json(['success' => true, 'value' => $fullUser]);
+    }
+
+
+    public function editUser(Request $request){
+        $id = $request->get('userId');
+        $user = User::find($id);
+
+        if (empty($user)){
+            return response()->json(['success' => false, 'message' => 'no such user']);
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->city = $request->city;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->name_of_business = $request->name_of_business;
+        $user->business_phone = $request->business_phone;
+        $user->working_area = $request->working_area;
+        $user->fax = $request->fax;
+        $user->is_active = $request->is_active;
+        $user->is_approved = $request->is_approved;
+        $user->role = $request->role;
+        $user->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function editProject(Request $request){
+        $id = $request->get('projectId');
+        $project = User::find($id);
+        if (empty($project)){
+            return response()->json(['success' => false, 'message' => 'no such project']);
+        }
+
+
+    }
+
+    public function editCategory(Request $request){
+        $id = $request->get('categoryId');
+        $category = User::find($id);
+        if (empty($category)){
+            return response()->json(['success' => false, 'message' => 'no such category']);
+        }
+    }
+
+    public function editOrder(Request $request){
+        $id = $request->get('orderId');
+        $order = Order::find($id);
+        if (empty($order)){
+            return response()->json(['success' => false, 'message' => 'no such order']);
+        }
     }
 }

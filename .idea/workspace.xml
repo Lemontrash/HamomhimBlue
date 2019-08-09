@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a696cc3d-657c-4239-9fcb-a49695ba9e1d" name="Default Changelist" comment="Big commit">
+    <list default="true" id="a696cc3d-657c-4239-9fcb-a49695ba9e1d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +52,13 @@
         <item name="hamomhim-blue: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="orders: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="hamomhim-blue@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="hamomhim-blue: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="users: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
@@ -58,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+            <state relative-caret-position="240">
+              <caret line="31" column="26" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="26" />
               <folding>
                 <element signature="e#40#56#0#PHP" expanded="true" />
               </folding>
@@ -70,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="82" column="29" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="29" />
+            <state relative-caret-position="352">
+              <caret line="79" column="59" selection-start-line="79" selection-start-column="59" selection-end-line="79" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -91,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SupportControllerCosImLazy.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+            <state relative-caret-position="474">
+              <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
               <folding>
                 <element signature="e#40#53#0#PHP" expanded="true" />
               </folding>
@@ -104,11 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addNewCategory</find>
-      <find>deleteSubcategory</find>
-      <find>deleteOrder</find>
-      <find>changeOrder</find>
-      <find>deleteProject</find>
       <find>getA</find>
       <find>mainPage</find>
       <find>MainPage</find>
@@ -134,6 +138,11 @@
       <find>getSingleProject</find>
       <find>getAllOrders</find>
       <find>addNewCa</find>
+      <find>editU</find>
+      <find>getAllCa</find>
+      <find>comme</find>
+      <find>edit</find>
+      <find>delete</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -480,7 +489,7 @@
       <workItem from="1565156271096" duration="14722000" />
       <workItem from="1565240789869" duration="1474000" />
       <workItem from="1565245468480" duration="8605000" />
-      <workItem from="1565330134470" duration="4583000" />
+      <workItem from="1565330134470" duration="7788000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit + reg">
       <created>1562940282979</created>
@@ -699,17 +708,59 @@
       <option name="project" value="LOCAL" />
       <updated>1565337119424</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Big commit">
+      <created>1565337225907</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1565337225907</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Big commit">
+      <created>1565337259024</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1565337259024</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Big commit">
+      <created>1565337348626</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1565337348626</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Big commit">
+      <created>1565337386640</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1565337386640</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Big commit">
+      <created>1565337486663</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1565337486663</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Big commit">
+      <created>1565337506164</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1565337506164</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143970000" />
+    <option name="totallyTimeSpent" value="147175000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21946308" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21946308" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -730,7 +781,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.14832215" />
+      <window_info active="true" anchor="right" id="Database" order="4" visible="true" weight="0.2543624" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2147651" />
@@ -1123,8 +1174,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SupportControllerCosImLazy.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+        <state relative-caret-position="474">
+          <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
           <folding>
             <element signature="e#40#53#0#PHP" expanded="true" />
           </folding>
@@ -1143,15 +1194,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="82" column="29" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="29" />
+        <state relative-caret-position="352">
+          <caret line="79" column="59" selection-start-line="79" selection-start-column="59" selection-end-line="79" selection-end-column="59" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="47" column="19" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+        <state relative-caret-position="240">
+          <caret line="31" column="26" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="26" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
           </folding>
