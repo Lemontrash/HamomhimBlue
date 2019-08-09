@@ -73,6 +73,7 @@ Route::group([
     Route::post('deleteCategory', 'AdminController@deleteCategory');
     Route::post('addNewCategory', 'AdminController@addNewCategory');
     Route::post('deleteSubcategory', 'AdminController@deleteSubcategory');
+    Route::post('editCategory', 'AdminController@editCategory');
 
     Route::post('getAllProjects', 'AdminController@getAllProjects');
     Route::post('getSingleProject', 'AdminController@getSingleProject');
@@ -84,6 +85,7 @@ Route::group([
     Route::post('getAllOrders', 'AdminController@getAllOrders');
     Route::post('deleteOrder', 'AdminController@deleteOrder');
     Route::post('changeOrder', 'AdminController@changeOrder');
+    Route::post('editOrder', 'AdminController@editOrder');
 
 
     Route::post('getAllUsers', 'AdminController@getAllUsers');

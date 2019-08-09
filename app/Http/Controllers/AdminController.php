@@ -335,18 +335,18 @@ class AdminController extends Controller
             return response()->json(['success' => false, 'message' => 'no such user']);
         }
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->city = $request->city;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
+        $user->name             = $request->name;
+        $user->email            = $request->email;
+        $user->city             = $request->city;
+        $user->address          = $request->address;
+        $user->phone            = $request->phone;
         $user->name_of_business = $request->name_of_business;
-        $user->business_phone = $request->business_phone;
-        $user->working_area = $request->working_area;
-        $user->fax = $request->fax;
-        $user->is_active = $request->is_active;
-        $user->is_approved = $request->is_approved;
-        $user->role = $request->role;
+        $user->business_phone   = $request->business_phone;
+        $user->working_area     = $request->working_area;
+        $user->fax              = $request->fax;
+        $user->is_active        = $request->is_active;
+        $user->is_approved      = $request->is_approved;
+        $user->role             = $request->role;
         $user->save();
 
         return response()->json(['success' => true]);
@@ -359,7 +359,11 @@ class AdminController extends Controller
             return response()->json(['success' => false, 'message' => 'no such project']);
         }
 
-
+        $project->name          = $request->name;
+        $project->description   = $request->description;
+        $project->status        = $request->status;
+        $project->save();
+        return response()->json(['success' => true]);
     }
 
     public function editCategory(Request $request){
@@ -368,6 +372,14 @@ class AdminController extends Controller
         if (empty($category)){
             return response()->json(['success' => false, 'message' => 'no such category']);
         }
+
+        $category->name  = $request->name;
+        if (!empty($request->file('image'))){
+            $file = FileController::uploadPicture('categoryImage', $request->file('image'));
+            $category->image = $file->file;
+        }
+        $category->save();
+
     }
 
     public function editOrder(Request $request){
