@@ -13,31 +13,18 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     public function addNewProject(Request $request){
-        $projectName        = $request->get('projectName');
-        $projectDescription = $request->get('projectDescription');
-        $orderWorkArea      = $request->get('orderWorkArea');
-        $orderName          = $request->get('orderName');
-        $orderDescription   = $request->get('orderDescription');
-        $categoryId         = $request->get('categoryId');
-        $subcategoryId      = $request->get('subcategoryId');
+        $projectName        = $request->get('name');
+        $projectDescription = $request->get('description');
+        $projectUserId      = $request->get('user_id');
+
 
         $project = Project::create([
             'name'          => $projectName,
             'description'   => $projectDescription,
-            'user_id'       => \Auth::id(),
+            'user_id'       => $projectUserId,
             'status'        => 'open'
-//            'userId'        => \Auth::id(),
         ]);
 
-        $order = Order::create([
-            'project_id'    => $project->id,
-            'category_id'   => $categoryId,
-            'subcategoryId' => $subcategoryId,
-            'name'          => $orderName,
-            'work_area'     => $orderWorkArea,
-            'description'   => $orderDescription,
-
-        ]);
         return response()->json(['success' => true], 201);
     }
 
