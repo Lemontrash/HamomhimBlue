@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->mediumText('name');
             $table->mediumText('description');
             $table->integer('userId');
+            $table->string('price',200)->nullable();
             $table->text('status');
             $table->timestamps();
             $table->softDeletes();
