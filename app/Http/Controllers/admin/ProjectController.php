@@ -18,6 +18,8 @@ use App\Subcategory;
 use App\TermsAndConditions;
 use App\User;
 use App\UserRating;
+use App\Http\Controllers\SupportControllerCosImLazy;
+use App\Http\Controllers\FileController.php;
 
 class ProjectController extends Controller
 {
@@ -71,10 +73,11 @@ class ProjectController extends Controller
     }
 
     public function addNewProject(Request $request){
-        $name = $request->name;
-        $description = $request->description;
-        $userId = $request->userId;
-        $status = $request->status;
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $userId = $request->input('userId');
+        $status = $request->input('status');
+        $price = $request->input('price');
 
         $user = User::find($userId);
         if (empty($user)){
@@ -84,7 +87,8 @@ class ProjectController extends Controller
             'name' => $name,
             'description' => $description,
             'user_id' => $userId,
-            'status' => $status
+            'status' => $status,
+            'price' => $price
         ]);
         return response()->json(['success' => true]);
     }

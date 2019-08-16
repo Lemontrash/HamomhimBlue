@@ -18,6 +18,8 @@ use App\Subcategory;
 use App\TermsAndConditions;
 use App\User;
 use App\UserRating;
+use App\Http\Controllers\SupportControllerCosImLazy;
+use App\Http\Controllers\FileController.php;
 
 class OrderController extends Controller
 {
