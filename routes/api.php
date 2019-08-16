@@ -68,10 +68,6 @@ Route::group([
     Route::post('changeHowItWorksArchitect', 'EditableController@changeHowItWorksArchitect');
     Route::post('changeHowItWorksWorker', 'EditableController@changeHowItWorksWorker');
 
-    Route::post('getAllUsers', 'AdminController@getAllUsers');
-    Route::post('getUserCounter', 'AdminController@getUserCounter');
-    Route::post('editUser', 'AdminController@editUser');
-    Route::post('deleteUser', 'AdminController@deleteUser');
 
     Route::post('getAllCategories', 'admin\CategoryController@getAllCategories');
     Route::post('deleteCategory', 'admin\CategoryController@deleteCategory');
