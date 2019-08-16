@@ -80,7 +80,8 @@ Route::group([
     Route::post('getSingleProject', 'admin\ProjectController@getSingleProject');
     Route::post('deleteProject', 'admin\ProjectController@deleteProject');
     Route::post('editProject', 'admin\ProjectController@editProject');
-
+    Route::post('addNewProject', 'admin\ProjectController@addNewProject');
+    Route::post('changeProject','admin\ProjectController@changeProject');
     Route::post('getAllOrders', 'admin\OrderController@getAllOrders');
     Route::post('deleteOrder', 'admin\OrderController@deleteOrder');
     Route::post('changeOrder', 'admin\OrderController@changeOrder');
