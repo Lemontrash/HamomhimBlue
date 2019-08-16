@@ -75,21 +75,48 @@ class ProjectController extends Controller
     public function addNewProject(Request $request){
         $name = $request->input('name');
         $description = $request->input('description');
-        $userId = $request->input('userId');
+        $user_id = $request->input('user_id');
         $status = $request->input('status');
         $price = $request->input('price');
 
-        $user = User::find($userId);
+        $user = User::find($user_id);
         if (empty($user)){
             return response()->json(['success' => false, 'message' => 'no such user']);
         }
         Project::create([
             'name' => $name,
             'description' => $description,
-            'user_id' => $userId,
+            'userId' => $user_id,
             'status' => $status,
             'price' => $price
         ]);
+        return response()->json(['success' => true]);
+    }
+
+    public function changeProject(Request $request){
+        $id = $request->input('projectId');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $user_id = $request->input('user_id');
+        $status = $request->input('status');
+        $price = $request->input('price');
+        $project = Project::find($id);
+        if (empty($project)){
+            return response()->json(['success' => false, 'message' => 'no such project']);
+        }
+        $user = User::find($user_id);
+        if (empty($user)){
+            return response()->json(['success' => false, 'message' => 'no such user']);
+        }
+    
+        $data =  [
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'userId' => $request->input('user_id'),
+            'status' => $request->input('status'),
+            'price' => $request->input('price')
+        ];
+        $project->update($data);
         return response()->json(['success' => true]);
     }
 
