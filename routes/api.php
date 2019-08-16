@@ -51,9 +51,14 @@ Route::post('changePassword', 'UserController@changePassword');
 Route::post('getAllUserFiles', 'UserController@getAllUserFiles');
 Route::post('getAllWorkerProjects', 'UserController@getAllWorkerProjects');
 Route::post('addRatingOnUser', 'UserController@addRatingOnUser');
+//fkdev
+Route::post('updateWorkerProfile', 'UserController@updateWorkerProfile');
+
 
 Route::post('architectSendRequest', 'ArchitectRequestController@architectSendRequest');
 Route::post('answerRequest', 'ArchitectRequestController@answerRequest');
+
+
 
 // ---------------------------------
 

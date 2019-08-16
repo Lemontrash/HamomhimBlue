@@ -48,8 +48,12 @@ class CategoryController extends Controller
 
     public function addNewCategory(Request $request){
         $categoryName = $request->get('categoryName');
-        $image = $request->file('image');
-        $image = json_decode(FileController::uploadPicture('categoryImage', $image));
+    
+        if ($request->hasFile('image'))
+            $image = json_decode(FileController::uploadPicture('categoryImage', $request->file('image')));
+        else
+            return response()->json(['success' => false, 'message' => 'Image is required']);
+
         $category = Category::create([
             'name' => $categoryName,
             'image' => $image->file
