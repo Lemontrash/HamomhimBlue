@@ -91,6 +91,17 @@ class SupportControllerCosImLazy extends Controller
 
         return $data;
     }
+     public static function parseCategory( $category){
+      
+            $subcatetegories = $category->getAllSubcategories;
+            $data['id']           = $category->id;
+            $data['name']         = $category->name;
+            $data['image']        = $category->image;
+            $data['created_at']   = $category->created_at->timestamp;
+            if (!$subcatetegories->isEmpty())
+                $data['subcategories'] = $subcatetegories;
+        return $data;
+    }
 
     public static function parseAllUsersForOrder($orderId){
         $workerOrders = WorkerOrder::where('order_id', $orderId)->get();
