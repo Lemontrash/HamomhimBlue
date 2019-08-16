@@ -55,7 +55,6 @@ Route::post('addRatingOnUser', 'UserController@addRatingOnUser');
 Route::post('architectSendRequest', 'ArchitectRequestController@architectSendRequest');
 Route::post('answerRequest', 'ArchitectRequestController@answerRequest');
 
-
 // ---------------------------------
 
 Route::group([
@@ -69,28 +68,32 @@ Route::group([
     Route::post('changeHowItWorksArchitect', 'EditableController@changeHowItWorksArchitect');
     Route::post('changeHowItWorksWorker', 'EditableController@changeHowItWorksWorker');
 
-    Route::post('getAllCategories', 'AdminController@getAllCategories');
-    Route::post('deleteCategory', 'AdminController@deleteCategory');
-    Route::post('addNewCategory', 'AdminController@addNewCategory');
-    Route::post('deleteSubcategory', 'AdminController@deleteSubcategory');
-    Route::post('editCategory', 'AdminController@editCategory');
-
-    Route::post('getAllProjects', 'AdminController@getAllProjects');
-    Route::post('getSingleProject', 'AdminController@getSingleProject');
-    Route::post('deleteProject', 'AdminController@deleteProject');
-    Route::post('editProject', 'AdminController@editProject');
-
-    Route::post('getAllComments', 'AdminController@getAllComments');
-
-    Route::post('getAllOrders', 'AdminController@getAllOrders');
-    Route::post('deleteOrder', 'AdminController@deleteOrder');
-    Route::post('changeOrder', 'AdminController@changeOrder');
-    Route::post('editOrder', 'AdminController@editOrder');
-
-
     Route::post('getAllUsers', 'AdminController@getAllUsers');
     Route::post('getUserCounter', 'AdminController@getUserCounter');
     Route::post('editUser', 'AdminController@editUser');
     Route::post('deleteUser', 'AdminController@deleteUser');
+
+    Route::post('getAllCategories', 'admin\CategoryController@getAllCategories');
+    Route::post('deleteCategory', 'admin\CategoryController@deleteCategory');
+    Route::post('addNewCategory', 'admin\CategoryController@addNewCategory');
+    Route::post('deleteSubcategory', 'admin\CategoryController@deleteSubcategory');
+    Route::post('editCategory', 'admin\CategoryController@editCategory');
+    Route::post('getSingleCategory', 'admin\CategoryController@getSingleCategory');
+
+    Route::post('getAllProjects', 'admin\ProjectController@getAllProjects');
+    Route::post('getSingleProject', 'admin\ProjectController@getSingleProject');
+    Route::post('deleteProject', 'admin\ProjectController@deleteProject');
+    Route::post('editProject', 'admin\ProjectController@editProject');
+
+    Route::post('getAllOrders', 'admin\OrderController@getAllOrders');
+    Route::post('deleteOrder', 'admin\OrderController@deleteOrder');
+    Route::post('changeOrder', 'admin\OrderController@changeOrder');
+    Route::post('editOrder', 'admin\OrderController@editOrder');
+
+    Route::post('getAllUsers', 'admin\UserController@getAllUsers');
+    Route::post('getUserCounter', 'admin\UserController@getUserCounter');
+    Route::post('editUser', 'admin\UserController@editUser');
+    Route::post('deleteUser', 'admin\UserController@deleteUser');
+    Route::post('getAllComments', 'admin\UserController@getAllComments');
 });
 
