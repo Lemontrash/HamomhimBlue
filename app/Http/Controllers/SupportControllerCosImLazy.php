@@ -53,14 +53,14 @@ class SupportControllerCosImLazy extends Controller
                 $data[$key]['id']           = $project->id;
                 $data[$key]['name']         = $project->name;
                 $data[$key]['description']  = $project->description;
-                $data[$key]['userId']       = $project->user_id;
+                $data[$key]['userId']       = $project->userId;
                 $data[$key]['created_at']   = $project->created_at->timestamp;
             }
         }else{
             $data['id']           = $projects->id;
             $data['name']         = $projects->name;
             $data['description']  = $projects->description;
-            $data['userId']       = $projects->user_id;
+            $data['userId']       = $projects->userId;
             $data['created_at']   = $projects->created_at->timestamp;
         }
         return $data;
@@ -89,6 +89,17 @@ class SupportControllerCosImLazy extends Controller
             }
         }
 
+        return $data;
+    }
+     public static function parseCategory( $category){
+
+            $subcatetegories = $category->getAllSubcategories;
+            $data['id']           = $category->id;
+            $data['name']         = $category->name;
+            $data['image']        = $category->image;
+            $data['created_at']   = $category->created_at->timestamp;
+            if (!$subcatetegories->isEmpty())
+                $data['subcategories'] = $subcatetegories;
         return $data;
     }
 
